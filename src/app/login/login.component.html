@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-title>Login</mat-card-title>
 <mat-card-content>
-<form>
+<form [formGroup]="angForm" novalidate>
 <p>
   <mat-form-field>
     <input type="text" matInput placeholder="Username" formControlName="username">
@@ -17,7 +17,7 @@
 
 
 <div class="button">
-  <button type="submit" mat-button>Login</button>
+  <button type="submit" mat-button  (click)="login()" [disabled]="!angForm.valid">Login</button>
 </div>
 
 </form>

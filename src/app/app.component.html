@@ -5,26 +5,39 @@
 
   <span class="example-fill-remaining-space"></span>
 
+  <div *ngIf="!token">
+    <button mat-button routerLink="/login">
+      <mat-icon>power_settings_new</mat-icon>
+      LOGIN
+    </button>
+    <button mat-button routerLink="/register">
+      <mat-icon>perm_identity</mat-icon>
+      SIGN UP
+    </button>
+  </div>
+  <div *ngIf="token">
+    <button mat-button (click)="signout()">
+      <mat-icon>login</mat-icon>
+      SIGN OUT
+    </button>
 
-  <button mat-button routerLink="/login">
-    <mat-icon>power_settings_new</mat-icon>
-    LOGIN
-  </button>
-  <button mat-button routerLink="/register">
-    <mat-icon>perm_identity</mat-icon>
-    SIGN UP
-  </button>
+    <button mat-button>
+      <mat-icon>perm_identity</mat-icon>
+      Hi {{username}}
+    </button>
+  </div>
 
-  <button mat-icon-button [matMenuTriggerFor]="appMenu">
+
+  <button *ngIf="token" mat-icon-button [matMenuTriggerFor]="appMenu">
     <mat-icon>more_vert</mat-icon>
   </button>
 </mat-toolbar>
 
 <mat-menu #appMenu="matMenu">
   <button mat-menu-item>Create new Ticket</button>
-  <button mat-menu-item>View Tickets</button>
+  <button mat-menu-item routerLink="/tickets">View Tickets</button>
   <button mat-menu-item>Report</button>
-  <button mat-menu-item>Sign out</button>
+  <button mat-menu-item (click)="signout()">Sign out</button>
 </mat-menu>
 
 

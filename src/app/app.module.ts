@@ -15,9 +15,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule} from '@angular/material/select';
+import { MatExpansionModule} from '@angular/material/expansion';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { TicketsComponent } from './tickets/tickets.component';
 
 
 
@@ -28,7 +30,8 @@ import { RegisterComponent } from './register/register.component';
     AppComponent,
     LoginComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    TicketsComponent
   ],
   imports: [
   BrowserModule,
@@ -43,7 +46,8 @@ import { RegisterComponent } from './register/register.component';
     MatSelectModule,
     MatInputModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

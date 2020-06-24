@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { GlobalConstants } from './../common/global-constants';
+import { LocalstorageService } from './localstorage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  apiUrl = GlobalConstants.apiURL;
 
-  register(formAttributes) {
-    this.http
-      .post('localhost:3000/api/v1/users', formAttributes)
-      .subscribe((data) => {
-        console.log(data);
-      });
+  constructor(private http: HttpClient, private storage: LocalstorageService) {}
+
+  register(data) {
+    return this.http.post(this.apiUrl + '/users', data);
   }
+
+  login(data) {
+    return this.http.post(this.apiUrl + '/login', data);
+  }
+
 }
