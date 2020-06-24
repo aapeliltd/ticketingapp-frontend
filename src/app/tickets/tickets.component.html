@@ -1,13 +1,27 @@
 <h1>Tickets</h1>
-<mat-accordion>
+<div style="text-align: center;">
+  <button mat-button (click)="refresh()">Refresh</button> <button mat-button *ngIf="!isAdmin" (click)="exportPDF()">Export to PDF or CSV</button>
+</div>
+
+<div *ngIf="defaultMessage == 1">
+    <br><br><br>
+    <h1>Hello {{user.name}}, seems this is your first time, please create your support ticket and we will be more than glad to respond ASAP. <mat-icon>thumb_up</mat-icon></h1>
+</div>
+
+<mat-accordion class="example-headers-align">
 
   <mat-expansion-panel *ngFor="let ticket of tickets">
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header color="primary">
       <mat-panel-title>
         {{ticket.title}}
       </mat-panel-title>
       <mat-panel-description>
-        Ticket No: #{{ticket.ticketNo}} | created at {{ticket.createdAt | date: 'medium'}}
+        <span style="float: right;">
+          Ticket No: #{{ticket.ticketNo}} | created at {{ticket.createdAt | date: 'medium'}}
+
+        </span>
+
+      <mat-icon>account_circle</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -18,7 +32,7 @@
     <h2>Comments</h2>
     <hr>
     <div>
-      <p *ngFor="let item of ticket.comments" [ngClass]="item.status==='Customer' ? 'float_left' : 'float_right'">
+      <p *ngFor="let item of ticket.comments">
         {{item.body}} <br> <br>
 
         <span style="font-weight:bold">{{item.status}}</span> : <mat-icon>chat</mat-icon>
@@ -29,28 +43,29 @@
 
       <mat-card class="example-card">
         <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Add Comment</mat-card-title>
+          <mat-card-title></mat-card-title>
           <mat-card-subtitle>
-            <mat-icon>chat-bubbles</mat-icon>
+            Add Comment
           </mat-card-subtitle>
         </mat-card-header>
 
         <mat-card-content>
-          <mat-form-field>
-            <input type="textarea" name="comment" matInput placeholder="Please add your comment here" formControlName="comment">
 
-
+          <mat-form-field class="example-full-width">
+            <mat-label>Leave a comment</mat-label>
+            <textarea matInput placeholder="Ex. It makes me feel..." [(ngModel)]="leaveComment"></textarea>
           </mat-form-field>
+
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>ADD COMMENT</button>
+        <mat-card-actions align="end">
+          <button mat-button (click)="addComment(ticket.id)" *ngIf="!ticket.isClose">ADD COMMENT</button>
 
         </mat-card-actions>
       </mat-card>
     </div>
     <mat-action-row>
-      <button mat-button>Close this ticket</button>
+      <h3 style="font-weight: bold;" *ngIf="ticket.isClose">This ticket is closed, only available for read only.</h3>
+      <button mat-button *ngIf="!ticket.isClose" (click)="closeTicket(ticket.id)">Close this ticket</button>
     </mat-action-row>
   </mat-expansion-panel>
 

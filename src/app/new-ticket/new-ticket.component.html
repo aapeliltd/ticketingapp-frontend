@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Add New Ticket</h2>
+
+<mat-dialog-content>
+ Please use this form below to create ticket.
+
+</mat-dialog-content>
+
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Title</mat-label>
+    <input matInput placeholder="Have challenges with the app" name="title" [(ngModel)]="ticket.title">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Create a ticket</mat-label>
+    <textarea [(ngModel)]="ticket.body" name="body" matInput placeholder="Ex. It makes me feel..."></textarea>
+  </mat-form-field>
+</form>
+
+<mat-dialog-actions>
+
+  <button mat-button mat-dialog-close mat-dialog-close="true">Close</button>
+  <button mat-button at-dialog-close (click)="addTicket()">Add Ticket</button>
+
+</mat-dialog-actions>
+
+
+
+

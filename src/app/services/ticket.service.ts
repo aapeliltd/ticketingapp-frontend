@@ -7,20 +7,26 @@ import { GlobalConstants } from './../common/global-constants';
 })
 export class TicketService {
   apiUrl = GlobalConstants.apiURL;
-  public tokenHeader = {
-    headers: new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('token')}`,
-      'Content-Type': 'application/json'
-    })
-  };
+  tokenHeader = GlobalConstants.tokenHeader;
   constructor(private http: HttpClient) {}
 
   getCustomerTickets() {
     const userId = localStorage.getItem('id');
-    return this.http.get(this.apiUrl + '/users/' + userId + '/tickets', this.tokenHeader);
+    return this.http.get(
+      this.apiUrl + '/users/' + userId + '/tickets',
+      this.tokenHeader
+    );
   }
 
   getAllTickets() {
-    return this.http.get(this.apiUrl + '/tickets');
+    return this.http.get(this.apiUrl + '/tickets', this.tokenHeader);
+  }
+
+  addTicket(data) {
+    return this.http.post(this.apiUrl + '/tickets', data, this.tokenHeader);
+  }
+
+  clostTicket(data) {
+    return this.http.post(this.apiUrl + '/ticket/close', data, this.tokenHeader);
   }
 }

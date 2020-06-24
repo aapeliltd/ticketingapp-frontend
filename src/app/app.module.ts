@@ -14,12 +14,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
 import { MatSelectModule} from '@angular/material/select';
 import { MatExpansionModule} from '@angular/material/expansion';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { TicketsComponent } from './tickets/tickets.component';
+import { NewTicketComponent } from './new-ticket/new-ticket.component';
 
 
 
@@ -31,8 +34,10 @@ import { TicketsComponent } from './tickets/tickets.component';
     LoginComponent,
     HomeComponent,
     RegisterComponent,
-    TicketsComponent
+    TicketsComponent,
+    NewTicketComponent
   ],
+  entryComponents: [NewTicketComponent],
   imports: [
   BrowserModule,
     AppRoutingModule,
@@ -44,10 +49,12 @@ import { TicketsComponent } from './tickets/tickets.component';
     MatIconModule,
     MatButtonModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatInputModule,
     MatCardModule,
     HttpClientModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { LocalstorageService } from './services/localstorage.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { NewTicketComponent } from './new-ticket/new-ticket.component';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +15,14 @@ export class AppComponent {
   email = '';
   token = '';
 
-
-  constructor(private router: Router, private route: ActivatedRoute ) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public matDialog: MatDialog
+  ) {
     this.username = localStorage.getItem('username');
     this.email = localStorage.getItem('email');
     this.token = localStorage.getItem('token');
-
   }
 
   signout() {
@@ -27,12 +30,21 @@ export class AppComponent {
     localStorage.removeItem('username');
     localStorage.removeItem('email');
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('is_admin');
 
     // this.theroute.navigate(['/login', this.agent.id], { relativeTo: this.route });
     this.router.navigate(['/login'], { relativeTo: this.route });
 
     // refresh the page
     window.location.reload();
+  }
 
+  openNewTicketWindow() {
+    const dialogRef = this.matDialog.open(NewTicketComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

@@ -34,11 +34,12 @@
 </mat-toolbar>
 
 <mat-menu #appMenu="matMenu">
-  <button mat-menu-item>Create new Ticket</button>
+  <button mat-menu-item (click)="openNewTicketWindow()">Create new Ticket</button>
   <button mat-menu-item routerLink="/tickets">View Tickets</button>
-  <button mat-menu-item>Report</button>
   <button mat-menu-item (click)="signout()">Sign out</button>
 </mat-menu>
+
+
 
 
 <router-outlet></router-outlet>

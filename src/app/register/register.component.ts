@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/tickets'], { relativeTo: this.route });
 
     // refresh the page
-    window.location.reload();
+    // window.location.reload();
   }
 
   handleError(error) {
